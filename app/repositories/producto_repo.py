@@ -4,19 +4,17 @@ from app.models.producto import Producto
 
 
 async def get_all(db):
-    stmt = (
-        select(Producto)
-        .options(
+    result = await db.execute(
+        select(Producto).options(
             joinedload(Producto.categoria),
             joinedload(Producto.imagenes),
         )
     )
-    result = await db.execute(stmt)
     return result.scalars().all()
 
 
 async def get_by_id(db, producto_id: int):
-    stmt = (
+    result = await db.execute(
         select(Producto)
         .where(Producto.id_producto == producto_id)
         .options(
@@ -24,5 +22,20 @@ async def get_by_id(db, producto_id: int):
             joinedload(Producto.imagenes),
         )
     )
-    result = await db.execute(stmt)
     return result.scalar_one_or_none()
+
+
+async def create(db, producto: Producto):
+    db.add(producto)
+    await db.commit()
+    await db.refresh(producto)
+    return producto
+
+
+async def update(db):
+    await db.commit()
+
+
+async def delete(db, producto: Producto):
+    await db.delete(producto)
+    await db.commit()
