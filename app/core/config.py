@@ -1,8 +1,11 @@
 from pydantic_settings import BaseSettings
+from typing import List
 
 
 class Settings(BaseSettings):
     DATABASE_URL: str
+    FRONTEND_URL: str
+    
 
     API_V1_PREFIX: str = "/api/v1"
     APP_NAME: str = "ApexStore API"
@@ -12,5 +15,10 @@ class Settings(BaseSettings):
         env_file = ".env"
         env_file_encoding = "utf-8"
 
+    @property
+    def CORS_ORIGINS(self) -> List[str]:
+        return [
+            self.FRONTEND_URL,
+        ]
 
 settings = Settings()

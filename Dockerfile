@@ -26,7 +26,7 @@ RUN uv sync --frozen
 COPY app ./app
 
 # ---- Expose port ----
-EXPOSE 8000
+EXPOSE 8011
 
 # ---- Run app ----
 CMD ["uv", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
