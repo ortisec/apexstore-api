@@ -4,7 +4,7 @@ from typing import List
 
 class Settings(BaseSettings):
     DATABASE_URL: str
-    FRONTEND_URL: str
+    FRONTEND_URL: str = "http://localhost:3000"
     
 
     API_V1_PREFIX: str = "/api/v1"

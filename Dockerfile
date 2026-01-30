@@ -13,6 +13,8 @@ RUN apt-get update && apt-get install -y \
 RUN curl -LsSf https://astral.sh/uv/install.sh | \
     UV_INSTALL_DIR=/usr/local/bin sh
 
+RUN uv --version
+
 # ---- Workdir ----
 WORKDIR /app
 
