@@ -4,7 +4,7 @@ from typing import List
 
 class Settings(BaseSettings):
     DATABASE_URL: str
-    FRONTEND_URL: str = "http://localhost:3000"
+    CORS_ORIGINS: str
     
 
     API_V1_PREFIX: str = "/api/v1"
@@ -17,8 +17,6 @@ class Settings(BaseSettings):
 
     @property
     def CORS_ORIGINS(self) -> List[str]:
-        return [
-            self.FRONTEND_URL,
-        ]
+        return [origin.strip() for origin in self.CORS_ORIGINS_RAW.split(",")]
 
 settings = Settings()
