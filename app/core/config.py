@@ -4,7 +4,7 @@ from typing import List
 
 class Settings(BaseSettings):
     DATABASE_URL: str
-    CORS_ORIGINS: str
+    CORS_ORIGINS_RAW: str
     
 
     API_V1_PREFIX: str = "/api/v1"
