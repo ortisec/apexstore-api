@@ -12,7 +12,9 @@ async def obtener_producto(db, producto_id: int):
 
 async def crear_producto(db, data):
     producto = Producto(**data.dict())
-    return await producto_repo.create(db, producto)
+    producto = await producto_repo.create(db, producto)
+    # Recargar el producto con sus relaciones para evitar MissingGreenlet
+    return await producto_repo.get_by_id(db, producto.id_producto)
 
 
 async def actualizar_producto(db, producto, data):
